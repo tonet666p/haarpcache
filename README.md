@@ -45,6 +45,7 @@ HaarpCache is a robust static and dynamic cache that provides support to the DAS
 		cd haarpcache
 		./configure
 		./configure CXX=g++-4.4 # <--- for ubuntu
+		./configure LDFLAGS="-I/usr/include/mysql -L/usr/lib64/mysql" # <--- CentOS/Fedora
 		make
 		make install
 		mysql -u root -p < haarp.sql

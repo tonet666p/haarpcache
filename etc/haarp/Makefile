@@ -1,5 +1,6 @@
 CXX = g++
 CFLAGS = -g -Wall -O2 -lmysqlclient -ldl -Wunused-result -rdynamic
+LDFLAGS = -I/usr/include/mysql -L/usr/lib64/mysql
 
 OBJECTS_BASE  = utils.o params.o 
 OBJECT_HC1 = haarpClean.o 
@@ -8,8 +9,8 @@ OBJECT_HC2 = haarpClean2.o
 all: haarputils
 
 haarputils: $(OBJECTS_BASE) $(OBJECT_HC1) $(OBJECT_HC2)
-	$(CXX) -o haarpclean $(OBJECTS_BASE) $(OBJECT_HC1) $(CFLAGS)
-	$(CXX) -o haarpclean2 $(OBJECTS_BASE) $(OBJECT_HC2) $(CFLAGS)
+	$(CXX) -o haarpclean $(OBJECTS_BASE) $(OBJECT_HC1) $(CFLAGS) $(LDFLAGS)
+	$(CXX) -o haarpclean2 $(OBJECTS_BASE) $(OBJECT_HC2) $(CFLAGS) $(LDFLAGS)
 
 utils.o: ../../haarp/utils.cpp ../../haarp/utils.h ../../haarp/default.h
 	$(CXX) $(CFLAGS) -c -o utils.o $<

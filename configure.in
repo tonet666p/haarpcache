@@ -54,9 +54,13 @@ then
 fi
 
 # Check mysql here
-AC_HAVE_LIBRARY([mysqlclient],[],[
-		         AC_MSG_ERROR(["libmysqlclient was not found! Please install libmysqlclient or correspondent for your system"])])
-AC_CHECK_HEADERS([mysql/mysql.h])
+AC_CHECK_LIB([libmysqlclient],[],[
+		         AC_MSG_ERROR(["libmysqlclient was not found! Please install mariadb-libs or correspondent for your system"])])
+
+AC_CHECK_HEADER([mysql/mysql.h],[],[
+		         AC_MSG_ERROR(["mysql/mysql.h was not found! Please install mariadb-devel or correspondent for your system"])])
+AC_CHECK_HEADER([blkid/blkid.h],[],[
+		         AC_MSG_ERROR(["blkid/blkid.h was not found! Please install libblkid-devel or correspondent for your system"])])
 
 LDFLAGS="$LDFLAGS $OSLIBS"
 CFLAGS=" -Wall -O2 -lmysqlclient -ldl"
