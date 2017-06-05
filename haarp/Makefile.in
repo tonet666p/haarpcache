@@ -32,10 +32,11 @@ install: all
 	$(INSTALL) -d -m 755 $(DESTDIR)$(sysconfdir)/haarp
 	$(INSTALL) -d -m 755 $(DESTDIR)$(sysconfdir)/haarp/plugins
 	$(INSTALL) -d -m 777 $(DESTDIR)/haarp
-	$(INSTALL) -d $(DESTDIR)/etc/init.d
+	$(INSTALL) -d $(DESTDIR)/etc/systemd
+	$(INSTALL) -d $(DESTDIR)/etc/systemd/system
 	$(INSTALL) -m 644 ../etc/haarp/haarp.conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf.default
 	$(INSTALL) -m 644 ../etc/haarp/haarpcache $(DESTDIR)$(sysconfdir)/logrotate.d/haarpcache
-	$(INSTALL) -m 777 ../etc/haarp/haarpclean $(DESTDIR)$(sysconfdir)/init.d/haarpclean
+	$(INSTALL) -m 777 ../etc/haarp/haarpclean $(DESTDIR)$(sbindir)/haarpclean
 	$(INSTALL) -m 777 ../etc/haarp/checkHaarpCache.sh $(DESTDIR)$(sysconfdir)/haarp/checkHaarpCache.sh
 	@if [ ! -f $(DESTDIR)$(sysconfdir)/haarp/haarp.conf ]; then \
 		echo "$(INSTALL) -m 644 ../etc/haarp/haarp.conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf"; \
@@ -44,10 +45,11 @@ install: all
                 echo "Updating config $(DESTDIR)$(sysconfdir)/haarp/haarp.conf"; \
                 ../update-conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf; \
 	fi
-	@if [ ! -f $(DESTDIR)$(sysconfdir)/init.d/haarp ]; then \
-                $(INSTALL) -m 755 ../etc/init.d/haarp $(DESTDIR)$(sysconfdir)/init.d/haarp; \
+    @if [ ! -f $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service ]; then \
+                $(INSTALL) -m 755 ../etc/systemd/system/haarp.service $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service; \
+                systemctl daemon-reload; \
         else \
-                echo "Not overwriting old $(DESTDIR)$(sysconfdir)/init.d/haarp.conf"; \
+                echo "Not overwriting old $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service"; \
         fi
 	@if [ ! -f $(DESTDIR)$(sysconfdir)/haarp/haarp.php ]; then \
                 $(INSTALL) -m 755 ../etc/haarp/haarp.php $(DESTDIR)$(sysconfdir)/haarp/haarp.php; \

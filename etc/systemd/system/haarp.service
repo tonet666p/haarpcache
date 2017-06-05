@@ -1,0 +1,14 @@
+[Unit]
+Description=Haarp Cache service
+After=squid.service
+Conflicts=sendmail.service exim.service
+
+[Service]
+Type=forking
+PIDFile=/var/log/haarp/haarp.pid
+ExecStart=/usr/local/sbin/haarp -c /etc/haarp/haarp.conf
+ExecReload=/usr/sbin/postfix reload
+ExecStop=/usr/sbin/postfix stop
+
+[Install]
+WantedBy=multi-user.target
