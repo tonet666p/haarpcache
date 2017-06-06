@@ -90,7 +90,7 @@ IPLAN=${interIP[$[index+1]]};
 #~
 #----------  Hasta aqui define la interfaz
 #
-clear
+#clear
 
 echo -e "${RED}*///////////////======= Instalando Dependencias =======///////////////*${NOR}"
 
@@ -106,7 +106,7 @@ dnf install -y mariadb-server mariadb-devel httpd php php-mysqlnd libblkid-devel
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 setenforce 0
 
-clear
+#clear
 echo -e "${RED}*///////////////======= Instalando SQUID =======///////////////*${NOR}"
 
 #aptitude install -y build-essential mysql-server 
@@ -174,7 +174,7 @@ access_log /var/log/squid/error.log
 cache_store_log none" > /etc/squid/squid.conf
 systemctl enable squid
 systemctl restart squid
-clear
+#clear
 echo -e "${RED}*///////////////======= Instalando HaarpCache =======///////////////*${NOR}"
 cd /usr/src/
 mv haarpcache "haarpcache_$(date +%Y%m%d)" 2>/dev/null
@@ -184,7 +184,7 @@ cd haarpcache
 make
 make install
 
-clear
+#clear
 echo -e "${RED}*///////////////======= Instalando la Base de Datos =======///////////////*${NOR}"
 systemctl enable mariadb
 systemctl restart mariadb
@@ -215,7 +215,7 @@ cache_peer_access 127.0.0.1 deny all" >> /etc/squid/squid.conf
 echo "# HaarpCache-Scripts: 
 0 0     * * *   root    /usr/local/sbin/haarpclean
 */1 *     * * *   root    /etc/haarp/checkHaarpCache.sh" >> /etc/crontab
-clear
+#clear
 # restart servers
 systemctl restart haarp
 systemctl restart httpd
