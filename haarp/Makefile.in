@@ -46,7 +46,7 @@ install: all
 		../update-conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf; \
 	fi
 	@if [ ! -f $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service ]; then \
-		$(INSTALL) -m 755 ../etc/systemd/system/haarp.service $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service;
+		$(INSTALL) -m 755 ../etc/systemd/system/haarp.service $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service; \
 		systemctl daemon-reload; \
 	else \
 		echo "Not overwriting old $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service"; \
