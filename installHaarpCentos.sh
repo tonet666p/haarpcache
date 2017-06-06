@@ -94,10 +94,12 @@ clear
 
 echo -e "${RED}*///////////////======= Instalando Dependencias =======///////////////*${NOR}"
 
-yum update -y
-yum groupinstall -y 'Development Tools'
+yum install epel-release
+yum install dnf -y
+dnf update -y
+dnf groupinstall -y 'Development Tools'
 
-yum install -y mariadb-server mariadb-libs mariadb-devel httpd php php-mysqlnd libblkid-devel sharutils curl autoconf squid git gcc-c++ bind bind-utils libcurl gnutls-devel
+dnf install -y mariadb-server mariadb-devel httpd php php-mysqlnd libblkid-devel sharutils squid bind bind-utils gnutls-devel
 
 clear
 echo -e "${RED}*///////////////======= Instalando SQUID =======///////////////*${NOR}"
@@ -235,7 +237,7 @@ echo "options {
 };" >> /etc/named.conf
 
 # Install Haarp-Viewer v1.x
-yum install unzip
+dnf install unzip
 cd /var/www/html/
 #wget http://extjs.cachefly.net/ext-3.4.0.zip 
 wget http://libs.gisi.ru/sources/ext-3.4.0.zip
@@ -251,7 +253,11 @@ ln -s html/ext-3.4.0 ../ext
 #./configure --prefix=/usr
 #make
 #make install    
-yum install libcgi
+
+dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-devel-1.0-10.el6.x86_64.rpm
+dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-1.0-10.el6.x86_64.rpm
+
+
 
 # Install HaarpViewer
 cd /usr/src/
@@ -284,8 +290,10 @@ systemctl restart httpd
 
 firewall-cmd --permanent --add-interface=$ETHLAN --zone=public
 firewall-cmd --permanent --add-port=3128/tcp --zone=public
-firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=3128:toaddr=$interIP --zone=public
+firewall-cmd --permanent --add-port=88/tcp --zone=public
+firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=3128:toaddr=$IPLAN --zone=public
 firewall-cmd --permanent --add-masquerade --zone=public
+firewall-cmd --reload
 
 echo "net.ipv4.ip_forward = 1" > /etc/sysctl.conf
 sysctl -p
@@ -299,6 +307,7 @@ echo -e "        /*       _\|/_
          |                                                                           |
          | Finish?, access to HaarpViewer: \e[4mhttp:///$IPLAN:88/cgi-bin/haarp.cgi\e[24m 
          +--------------------------------------------------------------------------*/"
-
-
+         
+         
+# Deshabilitar Selinux
 
