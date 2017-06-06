@@ -99,7 +99,12 @@ yum install dnf -y
 dnf update -y
 dnf groupinstall -y 'Development Tools'
 
-dnf install -y mariadb-server mariadb-devel httpd php php-mysqlnd libblkid-devel sharutils squid bind bind-utils gnutls-devel
+dnf install -y mariadb-server mariadb-devel httpd php php-mysqlnd libblkid-devel sharutils squid bind bind-utils gnutls-devel wget
+
+
+
+sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+setenforce 0
 
 clear
 echo -e "${RED}*///////////////======= Instalando SQUID =======///////////////*${NOR}"
@@ -125,7 +130,7 @@ dns_nameservers 8.8.8.8 8.8.4.4
 dns_retransmit_interval 5 seconds
 dns_timeout 2 minutes
 
-acl localnet src 192.168.0.0/24 # Your LAN
+acl localnet src 192.168.0.0/16 # Your LAN
 acl localnet src fc00::/7       # RFC 4193 local private network range
 acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines
 
@@ -254,9 +259,8 @@ ln -s html/ext-3.4.0 ../ext
 #make
 #make install    
 
-dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-devel-1.0-10.el6.x86_64.rpm
 dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-1.0-10.el6.x86_64.rpm
-
+dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-devel-1.0-10.el6.x86_64.rpm
 
 
 # Install HaarpViewer
@@ -279,13 +283,15 @@ touch /var/log/haarp/webaccess.log
 #chown www-data:www-data /var/log/haarp/webaccess.log
 echo "FORWARDED_IP true" >> /etc/haarp/haarp.conf
 # --- Apache to port 88 ---
-#sed -i 's/Listen.*[0-9]*/Listen 88/g' /etc/httpd/ports.conf
+sed -i 's/Listen.*[0-9]*/Listen 88/g' /etc/httpd/conf/httpd.conf
 #sed -i 's/NameVirtualHost.*:[0-9]*/NameVirtualHost *:88/g' /etc/apache2/ports.conf
 #sed -i 's/VirtualHost.*:[0-9]*>/VirtualHost *:88>/g'  /etc/apache2/sites-enabled/000-default
 # -- restart service apache2 --
 #a2enmod cgi 2>/dev/null
 
 echo -e "${RED}Configurando FirewallD${NOR}"
+
+systemctl enable httpd
 systemctl restart httpd
 
 firewall-cmd --permanent --add-interface=$ETHLAN --zone=public

@@ -7,8 +7,8 @@ Conflicts=sendmail.service exim.service
 Type=forking
 PIDFile=/var/log/haarp/haarp.pid
 ExecStart=/usr/local/sbin/haarp -c /etc/haarp/haarp.conf
-ExecReload=/usr/sbin/postfix reload
-ExecStop=/usr/sbin/postfix stop
+ExecReload=kill -HUP `cat /var/log/haarp/haarp.pid`; /usr/local/sbin/haarp -c /etc/haarp/haarp.conf;
+ExecStop=kill -HUP `cat /var/log/haarp/haarp.pid`
 
 [Install]
 WantedBy=multi-user.target
