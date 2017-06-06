@@ -42,24 +42,23 @@ install: all
 		echo "$(INSTALL) -m 644 ../etc/haarp/haarp.conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf"; \
 		$(INSTALL) -m 644 ../etc/haarp/haarp.conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf; \
 	else \
-                echo "Updating config $(DESTDIR)$(sysconfdir)/haarp/haarp.conf"; \
-                ../update-conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf; \
+		echo "Updating config $(DESTDIR)$(sysconfdir)/haarp/haarp.conf"; \
+		../update-conf $(DESTDIR)$(sysconfdir)/haarp/haarp.conf; \
 	fi
-    @if [ ! -f $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service ]; then \
-                $(INSTALL) -m 755 ../etc/systemd/system/haarp.service $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service; \
-                systemctl daemon-reload; \
-        else \
-                echo "Not overwriting old $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service"; \
-        fi
-	@if [ ! -f $(DESTDIR)$(sysconfdir)/haarp/haarp.php ]; then \
-                $(INSTALL) -m 755 ../etc/haarp/haarp.php $(DESTDIR)$(sysconfdir)/haarp/haarp.php; \
-        else \
-                echo "Not overwriting old $(DESTDIR)$(sysconfdir)/haarp/haarp.php"; \
-        fi
-	@if [ ! -f $(DESTDIR)$(sysconfdir)/haarp/haarp.lst ]; then \
-		 $(INSTALL) -m 755 ../etc/haarp/haarp.lst $(DESTDIR)$(sysconfdir)/haarp/haarp.lst; \
+	@if [ ! -f $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service ]; then \
+		$(INSTALL) -m 755 ../etc/systemd/system/haarp.service $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service; systemctl daemon-reload; \
 	else \
-		 echo "Not overwriting old $(DESTDIR)$(sysconfdir)/haarp/haarp.lst"; \
+		echo "Not overwriting old $(DESTDIR)$(sysconfdir)/systemd/system/haarp.service"; \
+	fi
+	@if [ ! -f $(DESTDIR)$(sysconfdir)/haarp/haarp.php ]; then \
+		$(INSTALL) -m 755 ../etc/haarp/haarp.php $(DESTDIR)$(sysconfdir)/haarp/haarp.php; \
+	else \
+		echo "Not overwriting old $(DESTDIR)$(sysconfdir)/haarp/haarp.php"; \
+	fi
+	@if [ ! -f $(DESTDIR)$(sysconfdir)/haarp/haarp.lst ]; then \
+		$(INSTALL) -m 755 ../etc/haarp/haarp.lst $(DESTDIR)$(sysconfdir)/haarp/haarp.lst; \
+	else \
+		echo "Not overwriting old $(DESTDIR)$(sysconfdir)/haarp/haarp.lst"; \
 	fi							       
 	$(INSTALL) -m 755 plugins/*.so $(DESTDIR)$(sysconfdir)/haarp/plugins/
 	chmod -R a+rX $(DESTDIR)$(sysconfdir)/haarp/plugins
