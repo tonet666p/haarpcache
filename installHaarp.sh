@@ -218,7 +218,9 @@ echo "options {
 # Install Haarp-Viewer v1.x
 aptitude install unzip
 cd /var/www/html/
-wget http://extjs.cachefly.net/ext-3.4.0.zip 
+#wget http://extjs.cachefly.net/ext-3.4.0.zip 
+http://libs.gisi.ru/sources/ext-3.4.0.zip
+
 unzip  ext-3.4.0.zip
 ln -s ext-3.4.0 ext
 ln -s html/ext-3.4.0 ../ext
