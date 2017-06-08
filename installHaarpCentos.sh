@@ -99,23 +99,19 @@ yum install dnf -y
 dnf update -y
 dnf groupinstall -y 'Development Tools'
 
-dnf install -y mariadb-server mariadb-devel httpd php php-mysqlnd libblkid-devel sharutils squid bind bind-utils gnutls-devel wget
+dnf install -y mariadb-server mariadb-devel httpd php php-mysqlnd libblkid-devel sharutils squid bind bind-utils gnutls-devel unzip gcc-c++
 
+#For Fedora
+#dnf install -y libcgi libcgi-devel
 
+dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-1.0-10.el6.x86_64.rpm
+dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-devel-1.0-10.el6.x86_64.rpm
 
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 setenforce 0
 
 #clear
 echo -e "${RED}*///////////////======= Instalando SQUID =======///////////////*${NOR}"
-
-#aptitude install -y build-essential mysql-server 
-#mysql-client 
-#php5 apache2 php5-mysql libblkid-dev libcurl4-gnutls-dev 
-#libmysqlclient15-dev 
-#libapache2-mod-auth-mysql 
-#libapache2-mod-php5  # php simplemente
-#sharutils curl autoconf squid3 git g++-4.4 bind9 dnsutils 
 
 mv /etc/squid/squid.conf "/etc/squid/squid.conf.backup_$(date +%Y%m%d)"
 touch /etc/squid/squid.conf
@@ -220,9 +216,6 @@ echo "# HaarpCache-Scripts:
 systemctl restart haarp
 systemctl restart httpd
 systemctl restart squid
-#/etc/init.d/haarp restart
-#/etc/init.d/apache2 restart
-#squid3 -k reconfigure 
 
 # DNS configuration
 mv /etc/resolv.conf "/etc/resolv.conf.backup_$(date +%Y%m%d)"
@@ -242,26 +235,12 @@ echo "options {
 };" >> /etc/named.conf
 
 # Install Haarp-Viewer v1.x
-dnf install unzip
 cd /var/www/html/
-#wget http://extjs.cachefly.net/ext-3.4.0.zip 
+
 wget http://libs.gisi.ru/sources/ext-3.4.0.zip
 unzip  ext-3.4.0.zip
 ln -s ext-3.4.0 ext
 ln -s html/ext-3.4.0 ../ext
-
-# Install LibCGI
-#cd /usr/src
-#git clone git://github.com/keikurono/libcgi.git
-#cd libcgi
-#./autogen.sh
-#./configure --prefix=/usr
-#make
-#make install    
-
-dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-1.0-10.el6.x86_64.rpm
-dnf install https://kojipkgs.fedoraproject.org//packages/libcgi/1.0/10.el6/x86_64/libcgi-devel-1.0-10.el6.x86_64.rpm
-
 
 # Install HaarpViewer
 cd /usr/src/
@@ -271,23 +250,15 @@ cd haarp-viewer/src/
 make
 
 cd ..
-#rm -f /usr/lib/cgi-bin/report.cgi /usr/lib/cgi-bin/haarp.cgi 2>/dev/null
 rm -f /var/www/cgi-bin/report.cgi /var/www/cgi-bin/haarp.cgi 2>/dev/null
-#cp src/*.cgi /usr/lib/cgi-bin/ 2>/dev/null
 cp src/*.cgi /var/www/cgi-bin/ 2>/dev/null
 yes | cp hc.html /var/www/html/ 2>/dev/null
-yes | cp hc.html /var/www/  2>/dev/null
 yes | cp -r images /var/www/html/ 2>/dev/null
-yes | cp -r images /var/www/ 2>/dev/null
 touch /var/log/haarp/webaccess.log
-#chown www-data:www-data /var/log/haarp/webaccess.log
+
 echo "FORWARDED_IP true" >> /etc/haarp/haarp.conf
 # --- Apache to port 88 ---
 sed -i 's/Listen.*[0-9]*/Listen 88/g' /etc/httpd/conf/httpd.conf
-#sed -i 's/NameVirtualHost.*:[0-9]*/NameVirtualHost *:88/g' /etc/apache2/ports.conf
-#sed -i 's/VirtualHost.*:[0-9]*>/VirtualHost *:88>/g'  /etc/apache2/sites-enabled/000-default
-# -- restart service apache2 --
-#a2enmod cgi 2>/dev/null
 
 echo -e "${RED}Configurando FirewallD${NOR}"
 
