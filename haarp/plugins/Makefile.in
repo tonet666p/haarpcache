@@ -106,7 +106,7 @@ OBJECTS = grandchase.com.br.so \
 	riotgames.com.so \
 	edgesuite.net.so \
 	nvidia.com.so \
-	cdn.dota2.com.so \
+	dota2.com.so \
 	zgncdn.com.so 
 		
 
