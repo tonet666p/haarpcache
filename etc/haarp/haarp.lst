@@ -116,4 +116,6 @@ http.{1,7}(\.|[a-z]|[0-9]|-)+(\/\w+)?(\/speedtest)+\/(random[0-9]+x[0-9]+\.jpg|l
 ^http.{3,60}\.modovideo\.com.*(\.flv|\.mp4)$
 ^http.{3,60}cutmu\.net.*(\.swf|\.mp3)$
 ^http.{3,60}\.telaxo\.com.*(\.jpg|\.png|\.gif|\.swf|\.mp3)$
-^http.{3,4}cdn\.(\w|\.)*cs\.steampowered\.com\/depot\/[0-9]+\/chunk\/\w{40}
+http.{3,60}\.cs\.steampowered\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}
+http.{3,60}\.steamcontent\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}
+

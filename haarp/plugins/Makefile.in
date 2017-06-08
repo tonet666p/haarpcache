@@ -132,6 +132,7 @@ copiar:
 	cp youtube.com.so googlevideo.com.so
 	cp orkut.com.so orkut.com.br.so
 	cp speedtest.net.so testdevelocidad.es.so
+	cp steampowered.com.so steamcontent.com.so
 	cp vimeo.com.so vimeocdn.com.so
 	cp nflximg.net.so nflximg.com.so
 	cp friv.com.so friv.wf.so
