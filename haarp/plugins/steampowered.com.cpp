@@ -6,6 +6,8 @@
 // use this line to compile
 // g++ -I. -fPIC -shared -g -o steampowered.com.so steampowered.com.cpp  
 // regex:
+// http://cdn.edgecast.cs.steampowered.com/depot/401537/manifest/99479346433520935/5? 
+// http://cdn.edgecast.cs.steampowered.com/depot/401537/chunk/2105fa26d7e64a307d0795084c293cc5b2096fdf?
 // http.{3,4}cdn\.(\w|\.)*cs\.steampowered\.com\/depot\/[0-9]+\/manifest\/\w{40}
 // http.{3,4}cdn\.(\w|\.)*cs\.steampowered\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19}\/5
 string get_filename(string url) {
@@ -20,16 +22,19 @@ string get_filename(string url) {
 			file = paths.at(i);
 			save = 0;
 		}
-		if(save == 2) {
-			stringexplode(paths.at(i), "?", &direct);
+		if(paths.at(i) == "depot")
+			save = 1;
+		if(paths.at(i) == "chunk"){
+			file = file + "_" + "chunk";
+			stringexplode(paths.at(i+1), "?", &direct);
 			file = file + "_" + direct.at(0);
 			return file;
 		}
-		if(paths.at(i) == "depot")
-			save = 1;
-		if(paths.at(i) == "chunk" || paths.at(i) == "manifest")
-			save = 2;
-		
+		if(paths.at(i) == "manifest"){
+			file = file + "_" + "manifest";
+			file = file + "_" + paths.at(i+1);
+			return file;
+		}
 	}
 	return "";
 }

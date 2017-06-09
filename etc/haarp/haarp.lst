@@ -1,4 +1,3 @@
 ^http.{3,60}\.cs\.steampowered\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}$
 ^http.{3,60}\.steamcontent\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}$
 ^http.{3,60}\.dota2\.com.*(\.jpg|\.png|\.gif|\.ico)$
-
