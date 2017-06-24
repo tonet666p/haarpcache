@@ -113,6 +113,9 @@ setenforce 0
 #clear
 echo -e "${RED}*///////////////======= Instalando SQUID =======///////////////*${NOR}"
 
+/usr/lib64/squid/ssl_crtd -c -s /var/lib/ssl_db
+chown -R squid.squid /var/lib/ssl_db
+
 mv /etc/squid/squid.conf "/etc/squid/squid.conf.backup_$(date +%Y%m%d)"
 touch /etc/squid/squid.conf
 echo "#===========================================================#
@@ -267,8 +270,10 @@ systemctl restart httpd
 
 firewall-cmd --permanent --add-interface=$ETHLAN --zone=public
 firewall-cmd --permanent --add-port=3128/tcp --zone=public
+firewall-cmd --permanent --add-port=3129/tcp --zone=public
 firewall-cmd --permanent --add-port=88/tcp --zone=public
 firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=3128:toaddr=$IPLAN --zone=public
+firewall-cmd --permanent --add-forward-port=port=443:proto=tcp:toport=3129:toaddr=$IPLAN --zone=public
 firewall-cmd --permanent --add-masquerade --zone=public
 firewall-cmd --reload
 
