@@ -1,7 +1,7 @@
-^.*(\.jpg|\.png|\.pdf|\.swf|\.gif|\.mp4|\.avi|\.flv|\.rar|\.zip|\.exe|\.gz|\.jpeg|\.mpeg|\.mp3)$
+^.*(\.jpg|\.png|\.pdf|\.swf|\.gif|\.mp4|\.avi|\.flv|\.rar|\.zip|\.exe|\.msi|\.gz|\.jpeg|\.mpeg|\.mp3)$
 ^http.{3,10}\.download\.nvidia.com\/.*\/((\w|-|\.)*([0-9]+\.[0-9]+)(\w|-|\.)*)+(\.exe|\.msi|\.run|\.gz|\.tar)$
 ^http.*(\.windowsupdate\.com|(update|download|dlservice|windowsupdate)\.microsoft\.com)\/.*(\.cab|\.exe|\.iso|\.zip|\.psf|\.txt|\.crt)$
-^http.{3,40}\.riotgames\.com\/.*\/lol\_air\_client\/.*\/([0-9]+\.)+[0-9]+\/.*
+^http.{3,40}\.riotgames\.com\/.*\/lol\_air\_client\/.*\/([0-9]+\.)+[0-9]+\/.*$
 ^http.{3,60}\.cs\.steampowered\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}$
 ^http.{3,60}\.steamcontent\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}$
 ^http.{3,60}\.dota2\.com.*(\.jpg|\.png|\.gif|\.ico)$
