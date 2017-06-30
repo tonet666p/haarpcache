@@ -1,4 +1,14 @@
 ^.*(\.jpg|\.png|\.pdf|\.swf|\.gif|\.mp4|\.avi|\.flv|\.rar|\.zip|\.exe|\.msi|\.gz|\.jpeg|\.mpeg|\.mp3)$
+
+^http.*(\.kiimg\.com|\.jkanime\.net|\.imgur\.com|\.deltron\.com\.pe|\.akamaized\.net|\.akamaihd\.net|\.savefrom\.net)\/.*(\.jpg|\.png|\.gif|\.jpeg)$
+^http.*(\.openh264\.org|\.google\.com)\/.*(\.pdf|\.rar|\.zip|\.exe|\.msi|\.gz)$
+^http.*(\.hdb-cm\.com)\/.*(\.mp4|\.flv|\.mpeg|\.mp3)$
+^http.*(\.edu\.|\.gob\.).{2,4}\/.*(\.jpg|\.png|\.pdf|\.swf|\.gif|\.mp4|\.avi|\.flv|\.rar|\.zip|\.exe|\.msi|\.gz|\.jpeg|\.mpeg|\.mp3)$
+^http.*(radio).{3,20}\/.*(\.jpg|\.png|\.pdf|\.swf|\.gif|\.mp4|\.avi|\.flv|\.jpeg|\.mpeg|\.mp3)$
+^http.*(\.stickyadstv\.com|\.springserve\.com)\/.*(\.swf)$
+
+^http.{1,10}\.bp\.blogspot\.com\/.*(\.jpg|\.mp4|\.flv|\.swf)$
+^http.*(\.imageshack\.(com|us))\/.*(\.jpg|\.png|\.gif|\.jpeg)$
 ^http.{3,10}\.download\.nvidia.com\/.*\/((\w|-|\.)*([0-9]+\.[0-9]+)(\w|-|\.)*)+(\.exe|\.msi|\.run|\.gz|\.tar)$
 ^http.*(\.windowsupdate\.com|(update|download|dlservice|windowsupdate)\.microsoft\.com)\/.*(\.cab|\.exe|\.iso|\.zip|\.psf|\.txt|\.crt)$
 ^http.{3,40}\.riotgames\.com\/.*\/lol\_air\_client\/.*\/([0-9]+\.)+[0-9]+\/.*$

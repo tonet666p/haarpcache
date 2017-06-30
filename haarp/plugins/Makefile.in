@@ -1,6 +1,7 @@
 CXX = @CXX@
 
 OBJECTS = generalplugin.so \
+		imageshack.com.so \
         microsoft.com.so \
         steampowered.com.so \
         riotgames.com.so \
@@ -20,6 +21,7 @@ cteste: teste.c ../utils.cpp ../utils.h
 copiar:
         cp microsoft.com.so  windowsupdate.com.so
         cp steampowered.com.so steamcontent.com.so
+        cp imageshack.us.so imageshack.com.so
 
 clean:
         rm -f *.so

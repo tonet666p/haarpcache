@@ -8,8 +8,8 @@
 // regex:
 // http://cdn.edgecast.cs.steampowered.com/depot/401537/manifest/99479346433520935/5? 
 // http://cdn.edgecast.cs.steampowered.com/depot/401537/chunk/2105fa26d7e64a307d0795084c293cc5b2096fdf?
-// http.{3,4}cdn\.(\w|\.)*cs\.steampowered\.com\/depot\/[0-9]+\/manifest\/\w{40}
-// http.{3,4}cdn\.(\w|\.)*cs\.steampowered\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19}\/5
+// ^http.{3,60}\.cs\.steampowered\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}$
+// ^http.{3,60}\.steamcontent\.com\/depot\/[0-9]+\/chunk|manifest\/\w{19,}(\/5){,1}$
 string get_filename(string url) {
 	vector<string> paths, direct;
 	string file = "";
@@ -48,6 +48,5 @@ extern "C" resposta hgetmatch2(const string url) {
 	r.domain = "steampowered";
 	r.match = true;
 	return r;
-	
 }
 
