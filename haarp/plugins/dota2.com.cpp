@@ -6,6 +6,7 @@
 // use this line to compile
 // g++ -I. -fPIC -shared -g -o dota2.com.so dota2.com.cpp  
 // regex:
+//    ^http.{3,60}\.dota2\.com\/.*(\.jpg|\.png|\.gif|\.ico)$
 // http://cdn.dota2.com/apps/dota2/images/blogfiles/2014/solo_esta_parte_cambia.png
 string get_filename(string url) {
 	vector<string> paths;
