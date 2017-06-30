@@ -6,7 +6,8 @@ OBJECTS = generalplugin.so \
         steampowered.com.so \
         riotgames.com.so \
         nvidia.com.so \
-        dota2.com.so
+        dota2.com.so \
+        spotify.com.so
 
 all: plugins cteste copiar
 
@@ -22,6 +23,7 @@ copiar:
         cp microsoft.com.so  windowsupdate.com.so
         cp steampowered.com.so steamcontent.com.so
         cp imageshack.us.so imageshack.com.so
+        cp spotify.com.so  edgesuite.net.so
 
 clean:
         rm -f *.so

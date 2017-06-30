@@ -11,9 +11,9 @@ sysconfdir = @sysconfdir@
 localstatedir = @localstatedir@
 
 OBJECTS = helper.o logfile.o connectiontobrowser.o \
-          httphandler.o params.o sockethandler.o \
-          connectiontohttp.o haarp.o proxyhandler.o md5.o utils.o \
-	  database_mysql.o connectiontohttp2.o 
+	httphandler.o params.o sockethandler.o \
+	connectiontohttp.o haarp.o proxyhandler.o md5.o utils.o \
+	database_mysql.o connectiontohttp2.o 
 
 all: haarp
 
