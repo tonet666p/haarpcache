@@ -9,10 +9,10 @@
 
 ^http.{1,10}\.bp\.blogspot\.com\/.*(\.jpg|\.mp4|\.flv|\.swf)$
 ^http.*(\.imageshack\.(com|us))\/.*(\.jpg|\.png|\.gif|\.jpeg)$
-^http.{3,20}\.spotify\.com(\.edgesuite\.net)?\/(audio\/\w{40}\?|head\/\w{40})$
+#^http.{3,20}\.spotify\.com(\.edgesuite\.net)?\/(audio\/\w{40}\?|head\/\w{40})
 ^http.{3,10}\.download\.nvidia.com\/.*\/((\w|-|\.)*([0-9]+\.[0-9]+)(\w|-|\.)*)+(\.exe|\.msi|\.run|\.gz|\.tar)$
 ^http.*(\.windowsupdate\.com|(update|download|dlservice|windowsupdate)\.microsoft\.com)\/.*(\.cab|\.exe|\.iso|\.zip|\.psf|\.txt|\.crt)$
 ^http.{3,40}\.riotgames\.com\/.*\/lol\_air\_client\/.*\/([0-9]+\.)+[0-9]+\/.*$
-^http.{3,60}(\.cs\.steampowered|\.steamcontent)\.com\/depot\/[0-9]+\/(chunk\/\w{40}\?|manifest\/\w{17}\/5\?)$
 ^http.{3,60}\.dota2\.com\/.*(\.jpg|\.png|\.gif|\.ico)$
+^http.{3,60}(\.cs\.steampowered|\.steamcontent)\.com\/depot\/[0-9]+\/(chunk|manifest).*$
 
